@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+</head>
+<body>
+  <h2>Checkout</h2>
+
+  <form action="" id="checkoutForm">
+    <input required placeholder="Full Name"><br><br>
+    <input required placeholder="Email"><br><br>
+    <button type="submit">Pay Now</button>
+  </form>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("checkoutForm").addEventListener("submit", async e => {
+      e.preventDefault();
+
+      const res = await fetch("http://localhost:3000/checkout", {
+        method: "Post",
+        headers: {"Content=Type": "application/json"},
+        body: JSON.stringify({ cart })
+      });
+
+      const data = await res.json();
+      window.location.href = data.url;
+    });
+  </script>
+</body>
+</html>
